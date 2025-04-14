@@ -10,7 +10,7 @@ class EmailCodesController < ApplicationController
     if email.present?
       if !email.ends_with?("@utrgv.edu")
         flash[:alert] = "Only @utrgv.edu emails are allowed."
-        render :new
+        redirect_to email_login_path
         return
       end
       user = User.find_or_create_by(email: email)
