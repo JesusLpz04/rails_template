@@ -1,4 +1,6 @@
-class Admin::ErrorsController < ApplicationController
-  def banned
+module Admin
+  class ErrorsController < ApplicationController
+    def banned
+    end
   end
 end
