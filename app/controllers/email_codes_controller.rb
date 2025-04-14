@@ -7,7 +7,12 @@ class EmailCodesController < ApplicationController
   def create
     email = params[:email].to_s.downcase
 
-    if email.present? && email.ends_with?("@utrgv.edu")
+    if email.present?
+      if !email.ends_with?("@utrgv.edu")
+        flash[:alert] = "Only @utrgv.edu emails are allowed."
+        render :new
+        return
+      end
       user = User.find_or_create_by(email: email)
       code = SecureRandom.hex(3).upcase
 
@@ -19,7 +24,7 @@ class EmailCodesController < ApplicationController
       UserMailer.verification_code_email(user).deliver_now
       redirect_to verify_code_path(email: email)
     else
-      flash[:alert] = "Please enter you Utrgv email."
+      flash[:alert] = "Please enter a valid email."
       render :new
     end
   end
