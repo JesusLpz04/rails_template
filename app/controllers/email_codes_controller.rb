@@ -7,12 +7,7 @@ class EmailCodesController < ApplicationController
   def create
     email = params[:email].to_s.downcase
 
-    unless email.ends_with?("@utrgv.edu")
-      flash[:alert] = "Only UTRGV email addresses are allowed."
-      return render :new
-    end
-
-    if email.present?
+    if email.present? && email.ends_with?("@utrgv.edu")
       user = User.find_or_create_by(email: email)
       code = SecureRandom.hex(3).upcase
 
