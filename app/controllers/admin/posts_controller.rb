@@ -1,4 +1,4 @@
-class Admin::ReportsController < Admin::BaseController
+class Admin::PostsController < ApplicationController
   def deleted
     @deleted_lost_items = LostItem.where(deleted: true)
     @deleted_found_items = FoundItem.where(deleted: true)
