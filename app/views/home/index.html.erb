@@ -1,18 +1,20 @@
+<div style="position: relative; background-image: url(<%= asset_path('utrgv-image.webp.png') %>); background-size: cover; background-position: center; min-height: 100vh;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); z-index: 1;"></div>
+  
+  <div class="container" style="position: relative; z-index: 2; color: white; padding: 2rem;">
+    <h1 style="color: white;">Welcome to Lost & Found @ UTRGV</h1>
+    <p style="color: white;">This is your central hub for reporting and finding lost items on campus.</p>
 
+    <div class="card" style="background-color: white; color: #333; padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+      <h2>📍 Report a Lost Item</h2>
+      <p>Let others know what you've lost and where you lost it.</p>
+      <a href="/lost_items/new" style="color: #f57c00; font-weight: bold;">Submit Lost Item</a>
+    </div>
 
-<div class="container">
-  <h1>Welcome to Lost & Found @ UTRGV</h1>
-  <p>This is your central hub for reporting and finding lost items on campus.</p>
-
-  <div class="card">
-    <h2>📍 Report a Lost Item</h2>
-    <p>Let others know what you've lost and where you lost it.</p>
-    <a href="/lost_items/new">Submit Lost Item</a>
-  </div>
-
-  <div class="card">
-    <h2>🎒 Found Something?</h2>
-    <p>Post found items here so the owner can claim them.</p>
-    <a href="/found_items/new">Report Found Item</a>
+    <div class="card" style="background-color: white; color: #333; padding: 1.5rem; border-radius: 10px;">
+      <h2>🎒 Found Something?</h2>
+      <p>Post found items here so the owner can claim them.</p>
+      <a href="/found_items/new" style="color: #f57c00; font-weight: bold;">Report Found Item</a>
+    </div>
   </div>
 </div>
