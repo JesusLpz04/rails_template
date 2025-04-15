@@ -1,46 +1,153 @@
-<%= form_with(model: found_item, local: true, html: { multipart: true }) do |form| %>
-  <% if found_item.errors.any? %>
-    <div style="color: red; margin-bottom: 1rem;">
-      <h4><%= pluralize(found_item.errors.count, "error") %> prevented this item from being saved:</h4>
-      <ul>
-        <% found_item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div style="background-color: #4a464d; min-height: 100vh; padding-top: 3rem; font-family: Arial, sans-serif;">
+  <div style="height: 5px; background-color: #f57c00;"></div>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
+  <div style="max-width: 600px; background-color: #f2f2f2; margin: 3rem auto; border-radius: 10px; padding: 2rem 2.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+    <h2 style="text-align: center; color: #222; margin-bottom: 1.5rem;">Found Item Form</h2>
+
+    <%= form_with(model: found_item, local: true, html: { multipart: true }) do |form| %>
+      <% if found_item.errors.any? %>
+        <div id="error_explanation" style="margin-bottom: 1rem; background: #ffebee; padding: 1rem; border-left: 6px solid #ef5350; border-radius: 6px;">
+          <h3 style="color: #c62828;"><%= pluralize(found_item.errors.count, "error") %> prevented this item from being saved:</h3>
+          <ul>
+            <% found_item.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div style="margin-bottom: 1rem;">
+        <%= form.label :name %><br>
+        <%= form.text_field :name, style: "width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, style: "width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+    <%= form.label :location, "Where was the item lost?" %><br>
+    <%= form.select :location, options_for_select([
+    "1. ESWOT - Social Work and Occupational Therapy",
+    "2. EITTB - International Trade & Technology",
+    "3. ECOXT - Orville Cox Tennis Center",
+    "4. ETRAK - Track & Soccer Field",
+    "5. EPACA - Performing Arts Complex A",
+    "6. ESWKH - Southwick Hall",
+    "7. EPACC - Performing Arts Complex C",
+    "8. EPACB - Performing Arts Complex B",
+    "9. ESSBL - Executive Tower",
+    "10. ESSBL - Student Services Building",
+    "11. ESSBL - Visitors Center",
+    "12. EMSAC - Mathematics & Science Academy",
+    "13. EMASS - Marialice Shary Shivers",
+    "14. ESTAC - Student Academic Center",
+    "15. EUCTR - University Center",
+    "16. ECHAP - Chapel",
+    "17. ESTUN - Student Union",
+    "18. EDBCX - Dining & Ballroom Complex",
+    "19. EHPE2 - Health & Physical Education II",
+    "20. EPOB4 - Engineering Portable",
+    "21. EENGR - Engineering",
+    "22. EACSB - Academic Services",
+    "23. EPHYS - Physical Science",
+    "24. EIMFD - Intramural Fields",
+    "25. ETROX - Troxel Hall",
+    "26. EHRTG - Heritage Hall",
+    "27. EEMLH - Emilia Schunior Ramirez Hall",
+    "28. ESRAX - Sugar Road Annex",
+    "29. EHPE1 - Health & Physical Education Complex",
+    "30. EPLAN - H.E.B. Planetarium",
+    "31. ESCNE - Science",
+    "32. ELCTR - The Learning Center",
+    "33. ELIBR - University Library",
+    "34. ELABS - Liberal Arts Building South",
+    "35. ECDCR - Child Development Center",
+    "36. EARCG - Agroecology Research Community Garden",
+    "37. EGRNH - Greenhouse",
+    "38. EPOB9-13 - Portable Buildings 9, 10, 11, 12, 13",
+    "39. EEDUC - Education Complex",
+    "40. EMAGC - Mathematics & General Classrooms",
+    "41. ECCTR - Computer Center",
+    "42. ECOBE - Robert C. Vackar College of Business and Entrepreneurship",
+    "43. ECULP - Central Utility Plant",
+    "44. EHABE - Health Affairs Building East",
+    "45. EBNSB - Behavioral Neurosciences",
+    "46. EHABW - Health Affairs Building West",
+    "47. EHABW - Health Affairs Building West Classroom A",
+    "48. EHABW - Health Affairs Building West Auditorium",
+    "49. ELABN - Liberal Arts Building North",
+    "50. EUNTY - Unity Hall",
+    "51. EASFC - Rio Grande Center for Manufacturing",
+    "52. EASFC - Police and Parking & Transportation Offices",
+    "53. EASFC - Academic Support Facility",
+    "54. EVLGA - The Village A",
+    "55. EVLGB - The Village B",
+    "56. EVLBC - The Village C",
+    "57. ELAMR - Lamar E",
+    "58. EREBL - Research Education (School of Medicine)",
+    "59. EMEBL - Medical Education (School of Medicine)",
+    "60. ESTHC - Student Health Center",
+    "61. EUREC - University Recreation",
+    "62. EPOB8 - ROTC Storage",
+    "63. EROTC - ROTC",
+    "64. EBSBL - Baseball Stadium",
+    "65. ESOCC - Soccer and Track & Field Complex",
+    "66. EPOB14 - Physical Science Portable",
+    "67. EIEAB - Interdisciplinary Engineering & Academic Building"
+
+    ], selected: form.object.location), { prompt: "Select a building", id: "lost-item-location-dropdown", name: "lost_item[location]" } %>
   </div>
 
-  <div>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </div>
+    <div style="margin-bottom: 20px;">
+        <h3>UTRGV MAP:</h3>
+        <div style="position: relative; display: inline-block;">
+          <img src="<%= asset_path('utrgv-edinburg-map.pdf.png') %>" usemap="#utrmap" alt="UTRGV Campus Map" style="width: 100%; max-width: 1000px; border-radius: 6px;">
+          <map name="utrmap">
+            <area shape="rect" coords="90,430,140,460" href="#" alt="ESWOT" onclick="selectBuilding('1. ESWOT - Social Work and Occupational Therapy')">
+          </map>
+        </div>
+        <div id="map-location-preview" style="margin-top: 10px; color: #333;"></div>
+      </div>
 
-  <div>
-    <%= form.label :location %><br>
-    <%= form.text_field :location %>
-  </div>
+      <div style="margin-bottom: 1rem;">
+        <%= form.label :category, "Item category" %><br>
+        <%= form.text_field :category, style: "width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
 
-  <div>
-    <%= form.label :category %><br>
-    <%= form.text_field :category %>
-  </div>
+      <div style="margin-bottom: 1rem;">
+        <%= form.label :found_date %><br>
+        <%= form.date_field :found_date, style: "width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 5px;" %>
+      </div>
 
-  <div>
-    <%= form.label :found_date %><br>
-    <%= form.date_field :found_date %>
-  </div>
+      <div style="margin-bottom: 1.5rem;">
+        <%= form.label :image %><br>
+        <%= form.file_field :image %>
+      </div>
 
-  <div>
-    <%= form.label :image %><br>
-    <%= form.file_field :image %>
-  </div>
+      <div>
+        <%= form.submit "Save Found Item", style: "width: 100%; background-color: #f57c00; color: white; padding: 0.75rem; border: none; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer;" %>
+      </div>
 
-  <div>
-    <%= form.submit "Save Found Item" %>
+      <script>
+        function selectBuilding(name) {
+          const dropdown = document.getElementById("lost-item-location-dropdown");
+          if (dropdown) {
+            for (const option of dropdown.options) {
+              if (option.value === name) {
+                dropdown.value = name;
+                break;
+              }
+            }
+          }
+          const hidden = document.getElementById("lost-item-location");
+          if (hidden) {
+            hidden.value = name;
+          }
+          document.getElementById("map-location-preview").innerHTML = `<p><strong>Selected Building:</strong> ${name}</p>`;
+        }
+      </script>
+    <% end %>
   </div>
-<% end %>
+</div>

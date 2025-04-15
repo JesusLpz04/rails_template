@@ -1,13 +1,24 @@
-<% if user_signed_in? %>
-  <% unless current_user == @found_item.user %>
-    <div style="margin-top: 1rem;">
-      <h4>Think this is yours?</h4>
-      <%= form_with url: claims_path, method: :post, local: true do |f| %>
-        <%= hidden_field_tag :found_item_id, @found_item.id %>
-        <label>Secret Question:</label><br>
-        <%= text_field_tag :answer, nil, placeholder: "Answer to secret question", style: "width: 100%; padding: 0.5rem; border-radius: 5px;" %><br><br>
-        <%= f.submit "Claim", style: "background-color: #f57c00; color: white; padding: 0.5rem 1rem; border-radius: 5px;" %>
-      <% end %>
+<div style="background-color: #4a464d; min-height: 100vh; padding-top: 3rem; font-family: Arial, sans-serif;">
+  <div style="height: 5px; background-color: #f57c00;"></div>
+
+  <div style="max-width: 600px; background-color: #f2f2f2; margin: 3rem auto; border-radius: 10px; padding: 2rem 2.5rem; box-shadow: 0 0 20px rgba(0,0,0,0.15);">
+    <h2 style="text-align: center; color: #222; margin-bottom: 1.5rem;"><%= @found_item.name %></h2>
+
+    <p style="margin-bottom: 1rem;"><strong>Description:</strong> <%= @found_item.description %></p>
+    <p style="margin-bottom: 1rem;"><strong>Category:</strong> <%= @found_item.category %></p>
+    <%# <p style="margin-bottom: 1rem;"><strong>Lost on:</strong> <%= @found_item.lost_date.strftime("%B %d, %Y") %>
+    <p style="margin-bottom: 1.5rem;"><strong>Location:</strong> <%= @found_item.location %></p>
+
+    <% if @found_item.image.attached? %>
+      <div style="margin-bottom: 1.5rem;">
+        <p><strong>Image:</strong></p>
+<%= image_tag @found_item.image, style: "max-width: 100%; border-radius: 6px;" %>
+      </div>
+    <% end %>
+
+    <div style="display: flex; justify-content: space-between;">
+      <%= link_to "Back", found_items_path, class: "btn", style: "padding: 0.5rem 1rem; background-color: #ccc; color: black; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
+      <%= link_to "Delete", found_item_path(@found_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn", style: "padding: 0.5rem 1rem; background-color: #f57c00; color: white; border-radius: 5px; text-decoration: none; font-weight: bold;" %>
     </div>
-  <% end %>
-<% end %>
+  </div>
+</div>
