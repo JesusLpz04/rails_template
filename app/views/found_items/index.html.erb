@@ -44,12 +44,100 @@
 <% end %>
 
         <!-- Edit/Delete Buttons for Owner -->
-        <% if user_signed_in? && item.user == current_user %>
+         <% if user_signed_in? && item.user == current_user %>
           <div style="margin-top: 1rem;">
             <%= link_to "Edit", edit_found_item_path(item), class: "btn", style: "margin-right: 0.5rem; color: white; background-color: #4a90e2; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
             <%= link_to "Delete", item, method: :delete, data: { confirm: "Are you sure?" }, class: "btn", style: "color: white; background-color: #e53935; padding: 0.5rem 1rem; border-radius: 4px; text-decoration: none; font-weight: bold;" %>
           </div>
         <% end %>
+                <% building_coords = {
+          "1. ESWOT" => [1010, 420],
+          "2. EITTB" => [1045, 373],
+          "3. ECOXT" => [970, 405],
+          "4. ETRAK" => [954, 376],
+          "5. EPACA" => [885, 410],
+          "6. ESWKH" => [845, 389],
+          "7. EPACC" => [834, 409],
+          "8. EPACB" => [824, 426],
+          "9. ESSBL" => [764, 407],
+          "10. ESSBL" => [749, 398],
+          "11. ESSBL" => [747, 416],
+          "12. EMSAC" => [687, 412],
+          "13. EMASS" => [685, 427],
+          "14. ESTAC" => [646, 424],
+          "15. EUCTR" => [619, 413],
+          "16. ECHAP" => [724, 373],
+          "17. ESTUN" => [681, 374],
+          "18. EDBCX" => [638, 390],
+          "19. EHPE2" => [984, 338],
+          "20. EPOB4" => [923, 346],
+          "21. EENGR" => [879, 352],
+          "22. EACSB" => [835, 358],
+          "23. EPHYS" => [748, 352],
+          "24. EIMFD" => [339, 236],
+          "25. ETROX" => [539, 328],
+          "26. EHRTG" => [540, 350],
+          "27. EEMLH" => [537, 370],
+          "28. ESRAX" => [486, 338],
+          "29. EHPE1" => [987, 275],
+          "30. EPLAN" => [886, 297],
+          "31. ESCNE" => [851, 304],
+          "32. ELCTR" => [802, 319],
+          "33. ELIBR" => [772, 304],
+          "34. ELABS" => [630, 350],
+          "35. ECDCR" => [999, 217],
+          "36. EARCG" => [973, 233],
+          "37. EGRNH" => [966, 245],
+          "38. EPOB9-13" => [966, 245],
+          "39. EEDUC" => [892, 238],
+          "40. EMAGC" => [804, 264],
+          "41. ECCTR" => [795, 244],
+          "42. ECOBE" => [760, 270],
+          "43. ECULP" => [704, 265],
+          "44. EHABE" => [708, 283],
+          "45. EBNSB" => [668, 273],
+          "46. EHABW" => [648, 278],
+          "47. EHABW" => [649, 292],
+          "48. EHABW" => [631, 272],
+          "49. ELABN" => [583, 293],
+          "50. EUNTY" => [468, 272],
+          "51. EASFC" => [371, 265],
+          "52. EASFC" => [370, 282],
+          "53. EASFC" => [370, 300],
+          "54. EVLGA" => [457, 235],
+          "55. EVLGB" => [1131, 193],
+          "56. EVLBC" => [740, 220],
+          "57. ELAMR" => [707, 201],
+          "58. EREBL" => [644, 218],
+          "59. EMEBL" => [641, 169],
+          "60. ESTHC" => [482, 209],
+          "61. EUREC" => [480, 180],
+          "62. EPOB8" => [706, 133],
+          "63. EROTC" => [681, 134],
+          "64. EBSBL" => [596, 57],
+          "65. ESOCC" => [142, 268],
+          "66. EPOB14" => [912, 187],
+          "67. EIEAB" => [710, 337]
+        } %>
+
+        <% coords = building_coords[item.location.split(" - ").first] %>
+        <% if coords %>
+          <style>
+            .map-pin {
+              position: absolute;
+              width: 8px;
+              height: 8px;
+              background-color: red;
+              border-radius: 50%;
+              transform: translate(-50%, -50%);
+            }
+          </style>
+          <div id="map-wrapper" style="position: relative; width: 100%; max-width: 300px; margin-top: 15px;">
+            <img src="<%= asset_path('utrgv-edinburg-map.pdf.png') %>" alt="UTRGV Map" style="width: 100%; border-radius: 8px;">
+            <div class="map-pin" style="left: <%= coords[0] * 300.0 / 1225.0 %>px; top: <%= coords[1] * 300.0 / 768.0 %>px;"></div>
+          </div>
+        <% end %>
+
       </div>
     <% end %>
   </div>

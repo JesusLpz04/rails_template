@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :email_codes, only: [:new, :create]
 
   authenticated :user do
-    root to: "lost_items#index", as: :authenticated_root
+    root to: "home#index", as: :authenticated_root
   end
 
   unauthenticated do
